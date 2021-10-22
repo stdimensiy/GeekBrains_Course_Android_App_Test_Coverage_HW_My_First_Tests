@@ -32,4 +32,32 @@ class CalculatorTests {
         val calculator = Calculator()
         Assertions.assertEquals(4, calculator.divide(8, 2), "8 / 2 should equal 4")
     }
+
+    @Test
+    @DisplayName("Incorrect Addition Two Numbers: 2 + 8 <> 10")
+    fun calculator_IncorrectAdditionTwoNumbers() {
+        val calculator = Calculator()
+        Assertions.assertEquals(0, 10 - calculator.add(2, 8), "Error! 2 + 8 not equal 10!!!")
+    }
+
+    @Test
+    @DisplayName("Incorrect Addition Two Numbers: 2 + 8 <> 10")
+    fun calculator_IncorrectSubtractionTwoNumbers() {
+        val calculator = Calculator()
+        Assertions.assertEquals(0, 6 - calculator.subtract(8, 2), "Error! 8 - 2 not equal 6!!!")
+    }
+
+    @Test
+    @DisplayName("Incorrect Addition Two Numbers: 2 * 8 <> 10")
+    fun calculator_IncorrectMultiplicationTwoNumbers() {
+        val calculator = Calculator()
+        Assertions.assertEquals(0, 16 - calculator.multiply(2, 8), "Error! 2 * 8 not equal 16!!!")
+    }
+
+    @Test
+    @DisplayName("Incorrect Addition Two Numbers: 2 + 8 <> 10")
+    fun calculator_IncorrectDivisionTwoNumbers() {
+        val calculator = Calculator()
+        Assertions.assertEquals(0, 4 - calculator.divide(8, 2), "Error! 8 / 2 not equal 4!!!")
+    }
 }
