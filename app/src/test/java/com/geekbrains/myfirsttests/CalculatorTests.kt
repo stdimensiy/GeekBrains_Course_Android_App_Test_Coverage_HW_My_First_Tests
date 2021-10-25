@@ -1,65 +1,66 @@
 package com.geekbrains.myfirsttests
 
-import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
+
 class CalculatorTests {
+
+    companion object{
+        private lateinit var calculator: Calculator
+        @BeforeAll
+        @JvmStatic
+        internal fun setup() {
+            calculator = Calculator()
+        }
+    }
+
     @Test
     @DisplayName("Correct Addition Two Numbers: 2 + 8 = 10")
     fun calculator_CorrectAdditionTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(10, calculator.add(2, 8), "2 + 8 should equal 10")
     }
 
     @Test
     @DisplayName("Correct Subtraction Two Numbers: 8 - 2 = 6")
     fun calculator_CorrectSubtractionTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(6, calculator.subtract(8, 2), "8 - 2 should equal 6")
     }
 
     @Test
     @DisplayName("Correct Multiplication Two Numbers: 8 * 2 = 16")
     fun calculator_CorrectMultiplicationTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(16, calculator.multiply(8, 2), "8 * 2 should equal 16")
     }
 
     @Test
     @DisplayName("Correct Division Two Numbers: 8 / 2 = 4")
     fun calculator_CorrectDivisionTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(4, calculator.divide(8, 2), "8 / 2 should equal 4")
     }
 
     @Test
     @DisplayName("Incorrect Addition Two Numbers: 2 + 8 <> 10")
     fun calculator_IncorrectAdditionTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(0, 10 - calculator.add(2, 8), "Error! 2 + 8 not equal 10!!!")
     }
 
     @Test
     @DisplayName("Incorrect Addition Two Numbers: 2 - 8 <> 6")
     fun calculator_IncorrectSubtractionTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(0, 6 - calculator.subtract(8, 2), "Error! 8 - 2 not equal 6!!!")
     }
 
     @Test
     @DisplayName("Incorrect Addition Two Numbers: 2 * 8 <> 16")
     fun calculator_IncorrectMultiplicationTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(0, 16 - calculator.multiply(2, 8), "Error! 2 * 8 not equal 16!!!")
     }
 
     @Test
     @DisplayName("Incorrect Addition Two Numbers: 8 / 2 <> 4")
     fun calculator_IncorrectDivisionTwoNumbers() {
-        val calculator = Calculator()
         Assertions.assertEquals(0, 4 - calculator.divide(8, 2), "Error! 8 / 2 not equal 4!!!")
     }
 
@@ -76,7 +77,6 @@ class CalculatorTests {
         "700, 7000, 7700"
     )
     fun add_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
-        val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.add(first, second)
         ) { "$first + $second should equal $expectedResult" }
@@ -93,7 +93,6 @@ class CalculatorTests {
         "700, 7000, 4900000"
     )
     fun multiplication_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
-        val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.multiply(first, second)
         ) { "$first * $second should equal $expectedResult" }
@@ -110,7 +109,6 @@ class CalculatorTests {
         "70000, 700,  69300"
     )
     fun subtraction_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
-        val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.subtract(first, second)
         ) { "$first - $second should equal $expectedResult" }
@@ -124,7 +122,6 @@ class CalculatorTests {
         "15,    2,    7",
     )
     fun division_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
-        val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.divide(first, second)
         ) { "$first / $second should equal $expectedResult" }

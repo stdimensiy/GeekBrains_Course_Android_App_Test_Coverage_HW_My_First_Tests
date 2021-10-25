@@ -1,16 +1,26 @@
 package com.geekbrains.myfirsttests
 
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 
 class TextConverterTests {
+    companion object {
+        private lateinit var textConverter: TextConverter
+
+        @BeforeAll
+        @JvmStatic
+        internal fun setup() {
+            textConverter = TextConverter()
+        }
+    }
+
     @Test
     @DisplayName("Combining first and last names: John + Doe = John Doe")
     fun nameConnector_SimpleTest() {
-        val textConverter = TextConverter()
         Assertions.assertEquals("John Doe",
             textConverter.nameConnector("John", "Doe"),
             "should equal John Doe")
@@ -30,7 +40,6 @@ class TextConverterTests {
         lastName: String,
         expectedResult: String,
     ) {
-        val textConverter = TextConverter()
         Assertions.assertEquals(
             expectedResult, textConverter.nameConnector(firstName = firstName, lastName = lastName)
         ) { "$firstName + $lastName should equal $expectedResult" }
@@ -39,7 +48,6 @@ class TextConverterTests {
     @Test
     @DisplayName("String to Long: 123456 = 123456(Long) NOTNULL")
     fun stringToLong_SimpleTest() {
-        val textConverter = TextConverter()
         Assertions.assertEquals(123456,
             textConverter.stringToLong("123456"),
             "should equal 123456 (Long)")
@@ -50,7 +58,6 @@ class TextConverterTests {
     @Test
     @DisplayName("String to Long: 123456.7 = NULL")
     fun stringToLong_SimpleTest_IncorrectValue() {
-        val textConverter = TextConverter()
         Assertions.assertNull(textConverter.stringToLong("123456.7"),
             "should equal NULL")
     }
@@ -58,7 +65,6 @@ class TextConverterTests {
     @Test
     @DisplayName("String to Int ARRAY: 11 222 3333 = {11, 222, 3333}")
     fun stringToIntArray_SimpleTest() {
-        val textConverter = TextConverter()
         Assertions.assertArrayEquals(arrayOf(11, 222, 3333),
             textConverter.stringToIntArray("11 222 3333"),
             "should equal NULL")
@@ -77,7 +83,6 @@ class TextConverterTests {
         str: String,
         rawExpectedResult: String,
     ) {
-        val textConverter = TextConverter()
         val expectedResult = rawExpectedResult.split("; ").map { it.toInt() }.toTypedArray()
         Assertions.assertArrayEquals(
             expectedResult, textConverter.stringToIntArray(str)
