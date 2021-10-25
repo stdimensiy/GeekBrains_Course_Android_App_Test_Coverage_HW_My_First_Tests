@@ -54,4 +54,33 @@ class TextConverterTests {
         Assertions.assertNull(textConverter.stringToLong("123456.7"),
             "should equal NULL")
     }
+
+    @Test
+    @DisplayName("String to Int ARRAY: 11 222 3333 = {11, 222, 3333}")
+    fun stringToIntArray_SimpleTest() {
+        val textConverter = TextConverter()
+        Assertions.assertArrayEquals(arrayOf(11, 222, 3333),
+            textConverter.stringToIntArray("11 222 3333"),
+            "should equal NULL")
+    }
+
+
+    @DisplayName("String to Int ARRAY - ParameterizedTest")
+    @ParameterizedTest(name = "{0} = '{'{1}'}'")
+    @CsvSource(
+        "1 22 333, 1; 22; 333",
+        "4 11 152 51, 4; 11; 152; 51",
+        "-21 10 -333, -21; 10; -333",
+        "7 6 5 4 3 2 1, 7; 6; 5; 4; 3; 2; 1",
+    )
+    fun stringToIntArray_ParamterizedTest(
+        str: String,
+        rawexpectedResult: String,
+    ) {
+        val textConverter = TextConverter()
+        val expectedResult = rawexpectedResult.split("; ").map { it.toInt() }.toTypedArray()
+        Assertions.assertArrayEquals(
+            expectedResult, textConverter.stringToIntArray(str)
+        ) { "$str should equal ${expectedResult.toString()}" }
+    }
 }
