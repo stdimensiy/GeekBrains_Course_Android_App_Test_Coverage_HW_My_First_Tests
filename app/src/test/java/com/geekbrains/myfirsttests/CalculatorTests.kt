@@ -3,6 +3,8 @@ package com.geekbrains.myfirsttests
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 
 class CalculatorTests {
     @Test
@@ -60,4 +62,72 @@ class CalculatorTests {
         val calculator = Calculator()
         Assertions.assertEquals(0, 4 - calculator.divide(8, 2), "Error! 8 / 2 not equal 4!!!")
     }
+
+    //Проба параметрического теста
+
+    @DisplayName("Addition")
+    @ParameterizedTest(name = "{0} + {1} = {2}")
+    @CsvSource(
+        "2,   3,    5",
+        "5,   10,   15",
+        "15,  27,   42",
+        "42,  58,   100",
+        "100, 500,  600",
+        "700, 7000, 7700"
+    )
+    fun add(first: Int, second: Int, expectedResult: Int) {
+        val calculator = Calculator()
+        Assertions.assertEquals(
+            expectedResult, calculator.add(first, second)
+        ) { "$first + $second should equal $expectedResult" }
+    }
+
+    @DisplayName("Multiplication")
+    @ParameterizedTest(name = "{0} * {1} = {2}")
+    @CsvSource(
+        "2,   3,    6",
+        "5,   10,   50",
+        "15,  27,   405",
+        "42,  58,   2436",
+        "100, 500,  50000",
+        "700, 7000, 4900000"
+    )
+    fun multiplication(first: Int, second: Int, expectedResult: Int) {
+        val calculator = Calculator()
+        Assertions.assertEquals(
+            expectedResult, calculator.multiply(first, second)
+        ) { "$first + $second should equal $expectedResult" }
+    }
+
+    @DisplayName("Subtraction")
+    @ParameterizedTest(name = "{0} - {1} = {2}")
+    @CsvSource(
+        "20,    3,     17",
+        "50,    10,    40",
+        "15,    27,    -12",
+        "42,    58,    -16",
+        "1000,  500,   500",
+        "70000, 700,  69300"
+    )
+    fun subtraction(first: Int, second: Int, expectedResult: Int) {
+        val calculator = Calculator()
+        Assertions.assertEquals(
+            expectedResult, calculator.subtract(first, second)
+        ) { "$first + $second should equal $expectedResult" }
+    }
+
+    @DisplayName("Division")
+    @ParameterizedTest(name = "{0} - {1} = {2}")
+    @CsvSource(
+        "20,    2,     10",
+        "50,    10,    5",
+        "15,    2,    7",
+    )
+    fun division(first: Int, second: Int, expectedResult: Int) {
+        val calculator = Calculator()
+        Assertions.assertEquals(
+            expectedResult, calculator.divide(first, second)
+        ) { "$first + $second should equal $expectedResult" }
+    }
+
 }
