@@ -43,21 +43,21 @@ class CalculatorTests {
     }
 
     @Test
-    @DisplayName("Incorrect Addition Two Numbers: 2 + 8 <> 10")
+    @DisplayName("Incorrect Addition Two Numbers: 2 - 8 <> 6")
     fun calculator_IncorrectSubtractionTwoNumbers() {
         val calculator = Calculator()
         Assertions.assertEquals(0, 6 - calculator.subtract(8, 2), "Error! 8 - 2 not equal 6!!!")
     }
 
     @Test
-    @DisplayName("Incorrect Addition Two Numbers: 2 * 8 <> 10")
+    @DisplayName("Incorrect Addition Two Numbers: 2 * 8 <> 16")
     fun calculator_IncorrectMultiplicationTwoNumbers() {
         val calculator = Calculator()
         Assertions.assertEquals(0, 16 - calculator.multiply(2, 8), "Error! 2 * 8 not equal 16!!!")
     }
 
     @Test
-    @DisplayName("Incorrect Addition Two Numbers: 2 + 8 <> 10")
+    @DisplayName("Incorrect Addition Two Numbers: 8 / 2 <> 4")
     fun calculator_IncorrectDivisionTwoNumbers() {
         val calculator = Calculator()
         Assertions.assertEquals(0, 4 - calculator.divide(8, 2), "Error! 8 / 2 not equal 4!!!")
@@ -75,7 +75,7 @@ class CalculatorTests {
         "100, 500,  600",
         "700, 7000, 7700"
     )
-    fun add(first: Int, second: Int, expectedResult: Int) {
+    fun add_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
         val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.add(first, second)
@@ -92,11 +92,11 @@ class CalculatorTests {
         "100, 500,  50000",
         "700, 7000, 4900000"
     )
-    fun multiplication(first: Int, second: Int, expectedResult: Int) {
+    fun multiplication_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
         val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.multiply(first, second)
-        ) { "$first + $second should equal $expectedResult" }
+        ) { "$first * $second should equal $expectedResult" }
     }
 
     @DisplayName("Subtraction")
@@ -109,25 +109,25 @@ class CalculatorTests {
         "1000,  500,   500",
         "70000, 700,  69300"
     )
-    fun subtraction(first: Int, second: Int, expectedResult: Int) {
+    fun subtraction_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
         val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.subtract(first, second)
-        ) { "$first + $second should equal $expectedResult" }
+        ) { "$first - $second should equal $expectedResult" }
     }
 
     @DisplayName("Division")
-    @ParameterizedTest(name = "{0} - {1} = {2}")
+    @ParameterizedTest(name = "{0} / {1} = {2}")
     @CsvSource(
         "20,    2,     10",
         "50,    10,    5",
         "15,    2,    7",
     )
-    fun division(first: Int, second: Int, expectedResult: Int) {
+    fun division_ParameterizedTest(first: Int, second: Int, expectedResult: Int) {
         val calculator = Calculator()
         Assertions.assertEquals(
             expectedResult, calculator.divide(first, second)
-        ) { "$first + $second should equal $expectedResult" }
+        ) { "$first / $second should equal $expectedResult" }
     }
 
 }

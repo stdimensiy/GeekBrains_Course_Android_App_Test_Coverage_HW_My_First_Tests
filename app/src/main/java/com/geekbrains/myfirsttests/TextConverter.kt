@@ -15,11 +15,9 @@ class TextConverter {
         return str.toLongOrNull()
     }
 
-    fun stringToIntArray(str: String): Array<Int>{
-        val newArrayString: Array<Int>
+    // метод преобразовывает строку массив целых чисел, если сможет конечно
+    fun stringToIntArray(str: String): Array<Int> {
         val list: List<String> = str.split(" ")
         return list.map { it.toInt() }.toTypedArray()
-        //return arrayOf(1, 22, 333)
-
     }
 }

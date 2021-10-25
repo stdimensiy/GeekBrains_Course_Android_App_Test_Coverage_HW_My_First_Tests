@@ -75,10 +75,10 @@ class TextConverterTests {
     )
     fun stringToIntArray_ParamterizedTest(
         str: String,
-        rawexpectedResult: String,
+        rawExpectedResult: String,
     ) {
         val textConverter = TextConverter()
-        val expectedResult = rawexpectedResult.split("; ").map { it.toInt() }.toTypedArray()
+        val expectedResult = rawExpectedResult.split("; ").map { it.toInt() }.toTypedArray()
         Assertions.assertArrayEquals(
             expectedResult, textConverter.stringToIntArray(str)
         ) { "$str should equal ${expectedResult.toString()}" }
